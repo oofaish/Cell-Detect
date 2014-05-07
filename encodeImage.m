@@ -95,7 +95,7 @@ end
 %Compute MSERs
 [r,ell] = vl_mser(img,'MaxArea', maxPix/numPixels,'MinArea',...
     minPix/numPixels,'MaxVariation',2,'MinDiversity',0.2,...
-    'Delta',1,'BrightOnDark',mserParms.bod,'DarkOnBright',mserParms.dob);
+    'Delta',mserParms.delta,'BrightOnDark',mserParms.bod,'DarkOnBright',mserParms.dob);
 ell = ell([2 1 5 4 3],:);
 
 %feature Vector

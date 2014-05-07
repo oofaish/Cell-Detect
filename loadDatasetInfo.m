@@ -20,6 +20,7 @@ function [files, imExt, dataFolder, outFolder, mserParms, tol] = loadDatasetInfo
 %Defaults
 BoD = 1;
 DoB = 1;
+delta = 10;
 minPixels = 10;
 maxPixels = [];
 
@@ -48,11 +49,13 @@ switch dataset
         dataFolder = 'Train45';
         outFolder  = 'Train45/out';
         imExt = 'pgm';
-        minPixels =  10;
-        maxPixels = 10000;
+        minPixels =  20;
+        maxPixels = 1000;
         BoD = 0;
         DoB = 1;
         tol = 8; %Tolerance (pixels) for evaluation only
+        delta = 10;
+        
 end
 
 if exist(dataFolder,'dir') ~= 7
@@ -69,6 +72,6 @@ mserParms.bod = BoD;
 mserParms.dob = DoB;
 mserParms.minPix = minPixels;
 mserParms.maxPix = maxPixels;
-
+mserParms.delta  = delta;
 
 end

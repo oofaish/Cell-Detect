@@ -33,7 +33,7 @@ img = imgFull;
 %Setup for the MSER algorithm
 numPixels = size(img,1)*size(img,2);
 minPixels = 20;
-maxPixels = 10000;
+maxPixels = 1000;
 BoD = 0; %Bright on Dark
 DoB = 1; %Dark on Bright 
 
@@ -51,7 +51,7 @@ end
 %Compute MSERs
 [r,ell] = vl_mser(img,'MaxArea',maxPixels/numPixels,'MinArea',...
     minPixels/numPixels,'MaxVariation',2,'MinDiversity',0.1,...
-    'Delta',1, 'BrightOnDark',BoD, 'DarkOnBright',DoB);
+    'Delta',10, 'BrightOnDark',BoD, 'DarkOnBright',DoB);
 ell = ell([2 1 5 4 3],:);
 
 %Get the boundaries and plot
