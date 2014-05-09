@@ -33,6 +33,7 @@ imgROI = img(y1:y2,x1:x2);
 
 if parms.addArea
     numPixels = size(img,1)*size(img,2);
+                                    %% area of the image  - 
     x(pos:pos+parms.nBinsArea-1) = [(numel(sel)/numPixels) zeros(1,parms.nBinsArea - 1)];
     pos = pos+parms.nBinsArea;
 end
@@ -60,6 +61,7 @@ if parms.addIntHist
 end
 
 if parms.addDiffHist
+    
     boundary = bwmorph(maskROI, 'remove');
     for i = 1:parms.nDilationScales
         border = boundary;
@@ -72,7 +74,7 @@ if parms.addDiffHist
         borderBig(borderBig == constrained) = 0;
         clear constrained
         
-        [~,distanceTransf] = bwdist(borderBig);
+        [~,distanceTransf] = bwdist(borderBig);%give the index of the nearest non zero pixel for each pixel
         
         borderPixels = border == 1;
         intensitiesIn = imgROI(borderPixels);

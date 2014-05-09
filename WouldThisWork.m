@@ -24,7 +24,7 @@ end
 
 %Load an Image
 %imgFull = imread('/phasecontrast/trainPhasecontrast/im01.pgm');
-imgFull = imread( 'Train45/ISBI_image_001.pgm' );
+imgFull = imread( 'Train45/full_list/ISBI_image_030.pgm' );
 
 %Smooth the image
 img = imgFull;
@@ -32,7 +32,7 @@ img = imgFull;
 
 %Setup for the MSER algorithm
 numPixels = size(img,1)*size(img,2);
-minPixels = 20;
+minPixels = 100;
 maxPixels = 1000;
 BoD = 0; %Bright on Dark
 DoB = 1; %Dark on Bright 
@@ -51,8 +51,8 @@ end
 %Compute MSERs
 [r,ell] = vl_mser(img,'MaxArea',maxPixels/numPixels,'MinArea',...
     minPixels/numPixels,'MaxVariation',2,'MinDiversity',0.1,...
-    'Delta',10, 'BrightOnDark',BoD, 'DarkOnBright',DoB);
-ell = ell([2 1 5 4 3],:);
+    'Delta',1, 'BrightOnDark',BoD, 'DarkOnBright',DoB, 'Verbose' );
+ell = ell([2 1 5 4 3],:);%for 2d Image, we need to do this to feed into VL_PLOTFRAME, as described in help.
 
 %Get the boundaries and plot
 boundary = zeros(size(img), 'uint8');
@@ -63,7 +63,7 @@ for k = 1:size(r,1)
     sel = vl_erfill(img,r(k)) ;
     mask = zeros(size(img), 'uint8');
     mask(sel) = 255;
-    mask = bwmorph(mask, 'remove');
+    mask = bwmorph(mask, 'remove');%remove the center of a connected area, leaving the boundary.
     boundary(mask == 1) = 255;
     vl_plotframe(ell(:,k),'color','g') ;
 end

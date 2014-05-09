@@ -1,9 +1,9 @@
 %imagesc( train_Nuclei{1} );
 %imshow( ISBI_Train{1} );
 
-actuallyRun = 0;
+actuallyRun = 1;
 
-if( 1 )
+if( 0 )
     folder      = 'Train45/';
     load( [ folder 'isbi_train.mat' ] );
     load( [ folder 'isbi_train_GT.mat' ] );
@@ -14,14 +14,14 @@ else
     load( [ folder 'isbi_test90.mat' ] );
     load( [ folder 'isbi_test90_GT.mat' ] );
     gtCells = abcGroundTruthCellsFromMaskCells( test_Nuclei );
-    images  = ISBI_test90;
+    images  = ISBI_Test90;
 end
     
 %now save them in the format carlos wants to make him happy
 fileNamePre = 'ISBI_image_';
 fileFormat  = 'pgm';
 
-if( 1 || actuallyRun )
+if( actuallyRun )
     for i=1:numel( gtCells )
         fileName = [ folder fileNamePre sprintf( '%03d', i ) ];
         gt = gtCells{ i };

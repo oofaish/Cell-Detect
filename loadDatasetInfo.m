@@ -46,15 +46,25 @@ switch dataset
         DoB = 1;
         tol = 8; %Tolerance (pixels) for evaluation only
     case 3 %ISBI Train
-        dataFolder = 'Train45';
+        dataFolder = 'Train45/full_list';
         outFolder  = 'Train45/out';
         imExt = 'pgm';
-        minPixels =  20;
+        minPixels =  100;
         maxPixels = 1000;
         BoD = 0;
         DoB = 1;
         tol = 8; %Tolerance (pixels) for evaluation only
-        delta = 10;
+        delta = 1;%I really rather have this at 2, but Carlos is not a fan
+    case 4 %ISBI Test
+        dataFolder = 'Test90';
+        outFolder  = 'Test90/out';
+        imExt = 'pgm';
+        minPixels =  100;
+        maxPixels = 1000;
+        BoD = 0;
+        DoB = 1;
+        tol = 8; %Tolerance (pixels) for evaluation only
+        delta = 1;
         
 end
 

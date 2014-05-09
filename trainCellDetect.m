@@ -70,7 +70,7 @@ while ~done
         %         pause;
         
         if structOut == 1 %If Structured output
-            
+            %ABCComment - why are the following lines required?
             X = X(1:length(r),:);
             Y = Y(1:length(r),:);
             gtInMSER = gtInMSER(1:length(r),:);
@@ -123,7 +123,7 @@ while ~done
     %-------------------------------------------------------------Train SVM
     w = [];
     
-    parm.verbose = 0 ;
+    parm.verbose = 0;
     
     if structOut
         parm.dimension = nFeatures;
@@ -142,6 +142,7 @@ while ~done
         disp('Running Cutting Plane Algorithm')
         C = ctrl.c;
         model = svm_struct_learn([' -c ' num2str(C) ' -o ' num2str(ctrl.o) ' -v 2 '], parm);
+        %ABCComment - why do we need [ w model.w] and not just model.w?
         w = [w model.w];        
     else
         parm.dimension = nFeatures;
@@ -185,7 +186,7 @@ if ~exist([outFolder '/wHistory.mat'],'file') == 0
 end
 
 %--------------------------------------------------------------------Finish
-disp('Done! Structured Output W vector loaded');
+disp('Done! Structured Output W vector l CBoaded');
 disp(' ');
 end
 
@@ -196,12 +197,14 @@ end
 
 %-------------------------------------------------------------Binary SVM CB
 
+%simple loss, to ensure we pick regions that have an annotation (GT) in them
 function delta = lossCB(param, y, ybar)
 delta = double(y ~= ybar) ;
 if param.verbose
     fprintf('delta = loss(%3d, %3d) = %f\n', y, ybar, delta) ;
 end
 end
+
 
 function psi = featureCB(param, x, y)
 psi = sparse(y*x/2) ;

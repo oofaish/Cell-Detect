@@ -5,8 +5,8 @@ function [parameters, ctrl] = setFeatures()
 %   ctrl = structure with some control parameters
 %-------------------------------------------------------------------Control
 %-Parallel computing-%
-ctrl.runPar = 0; %Set to activate parallel computing  
-ctrl.workers = 4;
+ctrl.runPar = 1; %Set to activate parallel computing  
+ctrl.workers = 2;
 
 %-Some Control Parameters-%
 ctrl.c = 1; %C in the optimizarion objective
@@ -20,7 +20,7 @@ ctrl.maxOuterIter = 2;
 %------------------------------------------------------------------Features
 
 eqHist = 0; %Equalize histogram
-addArea = 1; %Adds area descriptor of the MSER
+addArea = 1; %Adds area descriptor of the MSER (basically how big the region is)
 nBinsArea = 15;
 areaBinType = 'log';%linear = 'lin', logarithmic = 'log'
 minArea = 0.01/100;
